@@ -88,7 +88,7 @@ public class SiapeSenhaSwing extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (jPFSenha.getPassword().equals(jPFConfirmaSenha.getPassword())) {
-            
+            //chamar tela professorSwing
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

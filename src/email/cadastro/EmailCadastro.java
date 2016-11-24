@@ -52,7 +52,7 @@ public class EmailCadastro {
         HtmlEmail email = new HtmlEmail();
         email.setSSLOnConnect(true);
         email.setHostName("smtp.gmail.com");
-        email.setSslSmtpPort("465");
+        //email.setSslSmtpPort("465");
         email.setAuthenticator(new DefaultAuthenticator("contatogamesapp@gmail.com",  "gamesifsul" ));
         try {
             email.setFrom("contatogamesapp@gmail.com" , "Equipe GamesApp");
