@@ -6,6 +6,7 @@
 package principal.login.swing;
 
 import principal.cadastro.swing.CadastroSwing;
+import professor.swing.ProfessorSwing;
 
 /**
  *
@@ -148,12 +149,13 @@ public class LoginSwing extends javax.swing.JFrame {
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
         // TODO add your handling code here:
         new CadastroSwing().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
     private void jBEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntrarActionPerformed
         
         //verificar no banco o login e senha
-//        new ProfessorSwing().setVisible(true);
+        new ProfessorSwing().setVisible(true);
     }//GEN-LAST:event_jBEntrarActionPerformed
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
