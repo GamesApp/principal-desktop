@@ -5,6 +5,9 @@
  */
 package principal.login.swing;
 
+import Criptografia.ExemploCriptografia;
+import RecuperarSenha.RecuperarSenha;
+import javax.swing.JOptionPane;
 import principal.cadastro.swing.CadastroSwing;
 import professor.swing.ProfessorSwing;
 
@@ -22,6 +25,7 @@ public class LoginSwing extends javax.swing.JFrame {
         
         setSize(700, 500);
         setLocationRelativeTo(null);
+        jPFProfessorSenha.setText("");
     }
 
     @SuppressWarnings("unchecked")
@@ -38,6 +42,7 @@ public class LoginSwing extends javax.swing.JFrame {
         jBEntrar = new javax.swing.JButton();
         jBCadastrar = new javax.swing.JButton();
         jBCancelar = new javax.swing.JButton();
+        jLbRecuperarSenha = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,32 +89,35 @@ public class LoginSwing extends javax.swing.JFrame {
             }
         });
 
+        jLbRecuperarSenha.setFont(new java.awt.Font("Ubuntu", 0, 13)); // NOI18N
+        jLbRecuperarSenha.setForeground(new java.awt.Color(15, 126, 14));
+        jLbRecuperarSenha.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLbRecuperarSenha.setText("Recuperar senha");
+        jLbRecuperarSenha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLbRecuperarSenhaMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(233, 233, 233)
-                .addComponent(jLabel4))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(233, 233, 233)
-                .addComponent(jTFProfessorLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(233, 233, 233)
-                .addComponent(jLabel5))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(233, 233, 233)
-                .addComponent(jPFProfessorSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(265, 265, 265)
-                .addComponent(jBEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(265, 265, 265)
-                .addComponent(jBCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(265, 265, 265)
-                .addComponent(jBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(211, 211, 211)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel4)
+                    .addComponent(jTFProfessorLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addComponent(jPFProfessorSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLbRecuperarSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +132,9 @@ public class LoginSwing extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addGap(6, 6, 6)
                 .addComponent(jPFProfessorSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(54, 54, 54)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLbRecuperarSenha)
+                .addGap(32, 32, 32)
                 .addComponent(jBEntrar)
                 .addGap(6, 6, 6)
                 .addComponent(jBCadastrar)
@@ -163,9 +173,31 @@ public class LoginSwing extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jBCancelarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jLbRecuperarSenhaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbRecuperarSenhaMouseClicked
+        //recuperar senha
+        if (!jTFProfessorLogin.getText().equals("")) {
+            //procurar o email no banco
+            String email = jTFProfessorLogin.getText();
+            //pegar a senha do respectivo email e descriptografar
+            String senha= "cF^IJ/cZM\\";//estará gravada no bando criptografada
+            ExemploCriptografia recSenha = new ExemploCriptografia();
+            String senhaDescriptografada = recSenha.GeraCriptografia(senha, 2);
+            
+            try{
+                RecuperarSenha EnviaEmail = new RecuperarSenha();
+                EnviaEmail.EnviarEmail(email, senhaDescriptografada);
+                JOptionPane.showMessageDialog(null, "Dentro de instantes receberá sua senha no email cadastrado");
+
+            }catch(Exception ex){
+                JOptionPane.showMessageDialog(null, "Não foi possível enviar o email\nVerifique seu email de login e a conexão com a internet\nObrigado!");
+                jTFProfessorLogin.setText("");
+        }
+        }else{
+            JOptionPane.showMessageDialog(null, "Informe seu email de login");
+        }
+        
+    }//GEN-LAST:event_jLbRecuperarSenhaMouseClicked
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -206,6 +238,7 @@ public class LoginSwing extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLbRecuperarSenha;
     private javax.swing.JPasswordField jPFProfessorSenha;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTFProfessorLogin;

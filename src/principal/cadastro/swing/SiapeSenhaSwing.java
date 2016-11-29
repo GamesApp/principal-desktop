@@ -5,6 +5,8 @@
  */
 package principal.cadastro.swing;
 
+import Criptografia.CodCifraDeVigenere;
+import Criptografia.ExemploCriptografia;
 import javax.swing.JOptionPane;
 import professor.swing.ProfessorSwing;
 
@@ -20,6 +22,9 @@ public class SiapeSenhaSwing extends javax.swing.JFrame {
         this.email = email;
         
         initComponents();
+        
+        setSize(700,500);
+        setLocationRelativeTo(null);
     }
 
     SiapeSenhaSwing() {
@@ -65,7 +70,7 @@ public class SiapeSenhaSwing extends javax.swing.JFrame {
 
         jBSalvarProfessor.setBackground(new java.awt.Color(12, 12, 4));
         jBSalvarProfessor.setForeground(new java.awt.Color(248, 241, 241));
-        jBSalvarProfessor.setText("jButton1");
+        jBSalvarProfessor.setText("Salvar");
         jBSalvarProfessor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSalvarProfessorActionPerformed(evt);
@@ -199,16 +204,32 @@ public class SiapeSenhaSwing extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalvarProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarProfessorActionPerformed
-        if ( !jTFSiapeProfessor.equals("") && jPFSenhaProfessor.getPassword().equals(jPFConfirmaSenhaProfessor.getPassword())) {
-            //chamar tela professorSwing
-            //new professorswing.ProfessorSwing().setVisible(true);
-            new ProfessorSwing().setVisible(true);
+        if (!jTFSiapeProfessor.getText().equals("")) {
+            
+             if (String.valueOf(jPFSenhaProfessor.getPassword()).equals(String.valueOf(jPFConfirmaSenhaProfessor.getPassword()))) {
+                String SenhaProfessor = String.valueOf(jPFSenhaProfessor.getPassword());
+                System.out.println("Senha professor: "+SenhaProfessor);
+                
+                ExemploCriptografia ex = new ExemploCriptografia();
+                String SenhaCriptografada = ex.GeraCriptografia(SenhaProfessor, 1);
+                
+                System.out.println("senha professor criptografada: "+SenhaCriptografada);
+                //salvar PROFESSOR NO BANCO
+                
+                new ProfessorSwing().setVisible(true);
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "Os campos de nova senha não coincidem!");
+                jPFSenhaProfessor.setText("");
+                jPFConfirmaSenhaProfessor.setText("");
+            }
         }
+       
     }//GEN-LAST:event_jBSalvarProfessorActionPerformed
 
     private void jLbInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLbInfoMouseClicked
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Senha não pode conter caracteres especiais (, '' * / + - _ | & () {} : ; # @ !\nDica: utilize letras maiúsculas, minúsculas e números.\nIsso irá garantir uma maior segurança de suas senhas!" );
+        JOptionPane.showMessageDialog(null, "Por favor, sua senha não deverá conter acentos! \nDica: utilize letras maiúsculas, minúsculas, números e caracteres especiais.\nIsso irá garantir uma maior segurança de suas senhas!" );
     }//GEN-LAST:event_jLbInfoMouseClicked
 
 
