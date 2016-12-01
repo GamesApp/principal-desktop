@@ -8,6 +8,7 @@ package principal.cadastro.swing;
 import Criptografia.CodCifraDeVigenere;
 import Criptografia.ExemploCriptografia;
 import javax.swing.JOptionPane;
+import professor.swing.InformacoesSwing;
 import professor.swing.ProfessorSwing;
 
 /**
@@ -215,7 +216,7 @@ public class SiapeSenhaSwing extends javax.swing.JFrame {
                 
                 System.out.println("senha professor criptografada: "+SenhaCriptografada);
                 //salvar PROFESSOR NO BANCO
-                
+                new InformacoesSwing().setVisible(true);
                 new ProfessorSwing().setVisible(true);
                 
             }else{
