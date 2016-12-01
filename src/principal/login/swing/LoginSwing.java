@@ -5,8 +5,13 @@
  */
 package principal.login.swing;
 
+import Criptografia.CodCifraDeVigenere;
 import Criptografia.ExemploCriptografia;
 import RecuperarSenha.RecuperarSenha;
+import conexaodb.RequisicaoHttp;
+import entidades.pessoa.Professor;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import principal.cadastro.swing.CadastroSwing;
 import principal.cadastro.swing.SiapeSenhaSwing;
@@ -165,7 +170,22 @@ public class LoginSwing extends javax.swing.JFrame {
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
     private void jBEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntrarActionPerformed
-        
+        if (!jTFProfessorLogin.getText().equals("") && !String.valueOf(jPFProfessorSenha.getPassword()).equals("")) {
+            CodCifraDeVigenere criptografar = new CodCifraDeVigenere(String.valueOf(jPFProfessorSenha.getPassword()));
+            String senhaCriptografada = criptografar.cifrar();
+            
+            try {
+                Professor professor = new RequisicaoHttp().loginProfessor(jTFProfessorLogin.getText(), senhaCriptografada);
+                
+                if (professor != null) {
+                    System.out.println("Entrou");
+                } else {
+                    System.out.println("Não etrou");
+                }
+            } catch (Exception ex) {
+                Logger.getLogger(LoginSwing.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         //verificar no banco o login e senha
         new ProfessorSwing().setVisible(true);
         this.dispose();
