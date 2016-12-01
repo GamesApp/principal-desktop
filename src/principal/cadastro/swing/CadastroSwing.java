@@ -198,13 +198,13 @@ public class CadastroSwing extends javax.swing.JFrame {
                     new CodConfirmacaoSwing(codConfirmacao, jTFEmailProfessor.getText()).setVisible(true);
                     this.setVisible(false);
                 } else {
-                    JOptionPane.showMessageDialog(null, "Houve um erro ao enviar o e-mail com código de confirmação!\nFavor verificar a conexão com a internet e tentar novamente.");
+                    JOptionPane.showMessageDialog(null, "Houve um erro ao enviar o e-mail com código de confirmação!\nFavor verificar a conexão com a internet e tentar novamente.", "Erro na conexão",JOptionPane.WARNING_MESSAGE);
                 }
             } else{
-                JOptionPane.showMessageDialog(null, "Favor digitar um e-mail válido!");
+                JOptionPane.showMessageDialog(null, "Favor digitar um e-mail válido!", "E-mail inválido",JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Favor digitar um e-mail válido!");
+            JOptionPane.showMessageDialog(null, "Favor digitar um e-mail válido!", "E-mail inválido",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_jBCadastrarProfessorActionPerformed
 
@@ -215,8 +215,8 @@ public class CadastroSwing extends javax.swing.JFrame {
 
     private void jBCancelarCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarCadastroActionPerformed
         // TODO add your handling code here:
-        int resp = Integer.parseInt(JOptionPane.showInputDialog("Deseja cancelar o cadastro?\n1- Sim\n2- Não"));
-        if (resp == 1) {
+        int resp = JOptionPane.showConfirmDialog(null, "Deseja cancelar o cadastro?", "Cancelar", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (resp == JOptionPane.YES_OPTION) {
             this.dispose();
         }
         

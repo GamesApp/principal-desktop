@@ -9,6 +9,7 @@ import Criptografia.ExemploCriptografia;
 import RecuperarSenha.RecuperarSenha;
 import javax.swing.JOptionPane;
 import principal.cadastro.swing.CadastroSwing;
+import principal.cadastro.swing.SiapeSenhaSwing;
 import professor.swing.ProfessorSwing;
 
 /**
@@ -26,6 +27,7 @@ public class LoginSwing extends javax.swing.JFrame {
         setSize(700, 500);
         setLocationRelativeTo(null);
         jPFProfessorSenha.setText("");
+        jLbRecuperarSenha.setText("<html><u>Recuperar senha</u>");
     }
 
     @SuppressWarnings("unchecked")
@@ -159,17 +161,17 @@ public class LoginSwing extends javax.swing.JFrame {
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
         // TODO add your handling code here:
         new CadastroSwing().setVisible(true);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_jBCadastrarActionPerformed
 
     private void jBEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEntrarActionPerformed
         
         //verificar no banco o login e senha
         new ProfessorSwing().setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jBEntrarActionPerformed
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_jBCancelarActionPerformed
 
