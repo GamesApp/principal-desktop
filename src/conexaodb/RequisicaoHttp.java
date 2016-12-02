@@ -20,7 +20,7 @@ import java.net.URL;
  */
 public class RequisicaoHttp {
     private final String USER_AGENT = "Mozilla/5.0";
-    private final String IP = "128.1.2.185";
+    private final String IP = "127.0.0.1";
 
     public RequisicaoHttp() {
     }
@@ -33,7 +33,7 @@ public class RequisicaoHttp {
         String retornoJson = new RequisicaoHttp().sendGet(url);
         Professor professor;
         
-        if (!retornoJson.equals("Inexistente")) {
+        if (!retornoJson.equals("")) {
             professor = new Professor();
             Gson gson = new Gson();
 

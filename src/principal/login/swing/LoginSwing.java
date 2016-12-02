@@ -176,19 +176,26 @@ public class LoginSwing extends javax.swing.JFrame {
             
             try {
                 Professor professor = new RequisicaoHttp().loginProfessor(jTFProfessorLogin.getText(), senhaCriptografada);
+                System.out.println("professor" + professor.toString());
                 
-                if (professor != null) {
-                    System.out.println("Entrou");
+                if (professor.getEmail() != null) {
+                    System.out.println("passa");
+                    
+                    new ProfessorSwing().setVisible(true);
+                    this.setVisible(false);
                 } else {
-                    System.out.println("Não etrou");
+                    
+                    JOptionPane.showMessageDialog(null, "E-mail e/ou senha inválidos!\nFavor verificar e tentar novamente\n\nVocê pode clicar em cadastrar para criar um usuário", "Login não permitidos", JOptionPane.WARNING_MESSAGE);
                 }
             } catch (Exception ex) {
                 Logger.getLogger(LoginSwing.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Favor preencha todos os campos!", "Erro no login", JOptionPane.WARNING_MESSAGE);
         }
         //verificar no banco o login e senha
-        new ProfessorSwing().setVisible(true);
-        this.dispose();
+        //
+        //this.dispose();
     }//GEN-LAST:event_jBEntrarActionPerformed
 
     private void jBCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCancelarActionPerformed
