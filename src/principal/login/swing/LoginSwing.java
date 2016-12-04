@@ -118,13 +118,13 @@ public class LoginSwing extends javax.swing.JFrame {
                     .addComponent(jTFProfessorLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
                     .addComponent(jLabel5)
                     .addComponent(jPFProfessorSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLbRecuperarSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(251, 251, 251)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,11 +142,11 @@ public class LoginSwing extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLbRecuperarSenha)
                 .addGap(32, 32, 32)
-                .addComponent(jBEntrar)
+                .addComponent(jBEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
-                .addComponent(jBCadastrar)
+                .addComponent(jBCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6)
-                .addComponent(jBCancelar))
+                .addComponent(jBCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -164,7 +164,7 @@ public class LoginSwing extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBCadastrarActionPerformed
-        // TODO add your handling code here:
+       
         new CadastroSwing().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jBCadastrarActionPerformed
@@ -209,20 +209,20 @@ public class LoginSwing extends javax.swing.JFrame {
             String email = jTFProfessorLogin.getText();
             //pegar a senha do respectivo email e descriptografar
             String senha= "cF^IJ/cZM\\";//estará gravada no bando criptografada
-            ExemploCriptografia recSenha = new ExemploCriptografia();
-            String senhaDescriptografada = recSenha.GeraCriptografia(senha, 2);
+            CodCifraDeVigenere recSenha = new CodCifraDeVigenere(senha);
+            String senhaDescriptografada = recSenha.decifrar();
             
             try{
                 RecuperarSenha EnviaEmail = new RecuperarSenha();
                 EnviaEmail.EnviarEmail(email, senhaDescriptografada);
-                JOptionPane.showMessageDialog(null, "Dentro de instantes receberá sua senha no email cadastrado");
+                JOptionPane.showMessageDialog(null, "Dentro de instantes receberá sua senha no email cadastrado", "Atenção!", JOptionPane.WARNING_MESSAGE);
 
             }catch(Exception ex){
-                JOptionPane.showMessageDialog(null, "Não foi possível enviar o email\nVerifique seu email de login e a conexão com a internet\nObrigado!");
+                JOptionPane.showMessageDialog(null, "Não foi possível enviar o email\nVerifique seu email de login e a conexão com a internet\nObrigado!", "Atenção!", JOptionPane.WARNING_MESSAGE);
                 jTFProfessorLogin.setText("");
         }
         }else{
-            JOptionPane.showMessageDialog(null, "Informe seu email de login");
+            JOptionPane.showMessageDialog(null, "Favor informe seu email", "Atenção!", JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_jLbRecuperarSenhaMouseClicked

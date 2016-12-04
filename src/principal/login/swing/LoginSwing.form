@@ -58,15 +58,15 @@
                       <Component id="jTFProfessorLogin" alignment="0" pref="276" max="32767" attributes="0"/>
                       <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jPFProfessorSenha" alignment="0" pref="276" max="32767" attributes="0"/>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="32" pref="32" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jBEntrar" alignment="0" min="-2" pref="217" max="-2" attributes="0"/>
-                              <Component id="jBCadastrar" alignment="0" min="-2" pref="217" max="-2" attributes="0"/>
-                              <Component id="jBCancelar" alignment="0" min="-2" pref="217" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
                       <Component id="jLbRecuperarSenha" alignment="1" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="251" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="jBCancelar" min="-2" pref="196" max="-2" attributes="0"/>
+                      <Component id="jBCadastrar" min="-2" pref="196" max="-2" attributes="0"/>
+                      <Component id="jBEntrar" min="-2" pref="196" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -87,11 +87,11 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLbRecuperarSenha" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="jBEntrar" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBEntrar" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                  <Component id="jBCadastrar" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBCadastrar" min="-2" pref="28" max="-2" attributes="0"/>
                   <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                  <Component id="jBCancelar" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBCancelar" min="-2" pref="28" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
