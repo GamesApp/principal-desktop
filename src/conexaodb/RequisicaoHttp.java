@@ -60,6 +60,8 @@ public class RequisicaoHttp {
         
         String professorJson = gson.toJson(professor, professorType);
         
+        System.out.println("Professor Json: " + professorJson);
+        
         new RequisicaoHttp().sendPost(url, professorJson);
     }
 
@@ -103,6 +105,7 @@ public class RequisicaoHttp {
  
 		//add reuqest header
 		con.setRequestMethod("POST");
+                con.setRequestProperty("Content-Type", "application/json");
 		con.setRequestProperty("User-Agent", USER_AGENT);
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
  
