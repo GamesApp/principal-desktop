@@ -7,6 +7,7 @@ package conexaodb;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import entidades.atividade.Atividade;
 import entidades.pessoa.Professor;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -14,6 +15,7 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 /**
  *
@@ -65,6 +67,46 @@ public class RequisicaoHttp {
         System.out.println("Professor Json: " + professorJson);
         
         new RequisicaoHttp().sendPost(url, professorJson);
+    }
+    
+    //Método para inserir um novo professor
+    public void insertAtividade(Atividade atividade) throws Exception {
+        String url = "http://" + IP +
+                ":8080/web-service/webresources/GamesApp/Atividade/insert";
+        
+        Gson gson = new Gson();
+        Type atividadeType = new TypeToken<Atividade>() {}.getType();
+        
+        String atividadeJson = gson.toJson(atividade, atividadeType);
+        
+        System.out.println("Atividade Json: " + atividadeJson);
+        
+        new RequisicaoHttp().sendPost(url, atividadeJson);
+    }
+    
+    //Método para buscar todas as atividades
+    public ArrayList<Atividade> getAtividadeTodas() throws Exception {
+        //http://localhost:8080/web-service/webresources/GamesApp/Atividade/get/todas
+        String url = "http://" + IP +
+                ":8080/web-service/webresources/GamesApp/Atividade/get/todas";
+        
+        String retornoJson = new RequisicaoHttp().sendGet(url);
+        ArrayList<Atividade> atividades;
+        
+        if (!retornoJson.equals("")) {
+            atividades = new ArrayList<>();
+            Gson gson = new Gson();
+            
+            Type atividadesType = new TypeToken<ArrayList<Atividade>>() {}.getType();
+            
+            atividades = gson.fromJson(retornoJson, atividadesType);
+            
+            return atividades;
+        } else {
+            atividades = null;
+            
+            return atividades;
+        }
     }
 
     //Método que faz requisição http via url
