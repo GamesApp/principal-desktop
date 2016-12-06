@@ -14,7 +14,7 @@ import org.apache.commons.mail.HtmlEmail;
  *
  * @author matheush
  */
-public class EmailCadastro {
+public class EmailCadastro implements GeradorCodConfirmacao {
 
     public EmailCadastro() {
     }
