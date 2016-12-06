@@ -8,6 +8,7 @@ package conexaodb;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import entidades.atividade.Atividade;
+import entidades.pessoa.Aluno;
 import entidades.pessoa.Professor;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -51,7 +52,7 @@ public class RequisicaoHttp {
             
             return professor;
         }        
-    } 
+    }
     //http://localhost:8080/web-service/webresources/GamesApp/Professor/login/{email}/{senha}
     
     //Método para inserir um novo professor
@@ -67,6 +68,46 @@ public class RequisicaoHttp {
         System.out.println("Professor Json: " + professorJson);
         
         new RequisicaoHttp().sendPost(url, professorJson);
+    }
+    
+    //Método para verificar o login do aluno
+    public Aluno loginAluno(String email, String senha) throws Exception {
+        String url = "http://" + IP +
+                ":8080/web-service/webresources/GamesApp/Aluno/login/" +
+                email + "/" + senha;
+        
+        String retornoJson = new RequisicaoHttp().sendGet(url);
+        Aluno aluno;
+        
+        if (!retornoJson.equals("")) {
+            aluno = new Aluno();
+            Gson gson = new Gson();
+
+            Type alunoType = new TypeToken<Aluno>() {}.getType();
+
+            aluno = gson.fromJson(retornoJson, alunoType);
+            
+            return aluno;
+        } else {
+            aluno = null;
+            
+            return aluno;
+        }        
+    }
+    
+    //Método para inserir um novo aluno
+    public void insertAluno(Aluno aluno) throws Exception {
+        String url = "http://" + IP +
+                ":8080/web-service/webresources/GamesApp/Aluno/insert";
+        
+        Gson gson = new Gson();
+        Type alunoType = new TypeToken<Aluno>() {}.getType();
+        
+        String alunoJson = gson.toJson(aluno, alunoType);
+        
+        System.out.println("Aluno Json: " + alunoJson);
+        
+        new RequisicaoHttp().sendPost(url, alunoJson);
     }
     
     //Método para inserir um novo professor
