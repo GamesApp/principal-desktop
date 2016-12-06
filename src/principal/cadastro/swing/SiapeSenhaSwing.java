@@ -7,6 +7,10 @@ package principal.cadastro.swing;
 
 import Criptografia.CodCifraDeVigenere;
 import Criptografia.ExemploCriptografia;
+import conexaodb.RequisicaoHttp;
+import entidades.pessoa.Professor;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import professor.swing.InformacoesSwing;
 import professor.swing.ProfessorSwing;
@@ -207,17 +211,35 @@ public class SiapeSenhaSwing extends javax.swing.JFrame {
     private void jBSalvarProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalvarProfessorActionPerformed
         if (!jTFSiapeProfessor.getText().equals("")) {
             
-             if (String.valueOf(jPFSenhaProfessor.getPassword()).equals(String.valueOf(jPFConfirmaSenhaProfessor.getPassword()))) {
-                String SenhaProfessor = String.valueOf(jPFSenhaProfessor.getPassword());
-                System.out.println("Senha professor: "+SenhaProfessor);
+            if (String.valueOf(jPFSenhaProfessor.getPassword()).equals(String.valueOf(jPFConfirmaSenhaProfessor.getPassword()))) {
+                String senhaProfessor = String.valueOf(jPFSenhaProfessor.getPassword());
+                System.out.println("Senha professor: "+senhaProfessor);
+                
+                //VERIFICAR SE ESTÁ CORRETO A FUCK DA SENHA
                 
                 ExemploCriptografia ex = new ExemploCriptografia();
-                String SenhaCriptografada = ex.GeraCriptografia(SenhaProfessor, 1);
+                String senhaCriptografada = ex.GeraCriptografia(senhaProfessor, 1);
                 
-                System.out.println("senha professor criptografada: "+SenhaCriptografada);
+                System.out.println("senha professor criptografada: "+senhaCriptografada);
                 //salvar PROFESSOR NO BANCO
-                new InformacoesSwing().setVisible(true);
-                new ProfessorSwing().setVisible(true);
+                //CONSUMIR REQUISICAOHTTP MÉTODO SENDPOST
+                
+                Professor professor = new Professor();
+                professor.setEmail(email);
+                professor.setSiape(jTFSiapeProfessor.getText());
+                professor.setSenha(senhaCriptografada);
+                
+                try {
+                    new RequisicaoHttp().insertProfessor(professor);
+                } catch (Exception ex1) {
+                    //colocar dialog de erro de conexão
+                    Logger.getLogger(SiapeSenhaSwing.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+                
+                this.setVisible(false);
+                //REVER ESSA INFORMAÇÕES SWING
+                //new InformacoesSwing().setVisible(true);
+                //new ProfessorSwing().setVisible(true);
                 
             }else{
                 JOptionPane.showMessageDialog(null, "Os campos de nova senha não coincidem!");

@@ -26,6 +26,7 @@ public class RequisicaoHttp {
     public RequisicaoHttp() {
     }
     
+    //Método para verificar o login do professor
     public Professor loginProfessor(String email, String senha) throws Exception {
         String url = "http://" + IP +
                 ":8080/web-service/webresources/GamesApp/Professor/login/" +
@@ -51,6 +52,7 @@ public class RequisicaoHttp {
     } 
     //http://localhost:8080/web-service/webresources/GamesApp/Professor/login/{email}/{senha}
     
+    //Método para inserir um novo professor
     public void insertProfessor(Professor professor) throws Exception {
         String url = "http://" + IP +
                 ":8080/web-service/webresources/GamesApp/Professor/insert";
@@ -65,76 +67,76 @@ public class RequisicaoHttp {
         new RequisicaoHttp().sendPost(url, professorJson);
     }
 
+    //Método que faz requisição http via url
     private String sendGet(String url) throws Exception {
  
-		//String url = "http://localhost:8080/RestExemplo01/webresources/generic/exemplojson/oi";
+	//String url = "http://localhost:8080/RestExemplo01/webresources/generic/exemplojson/oi";
  
-		URL obj = new URL(url);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+	URL obj = new URL(url);
+	HttpURLConnection con = (HttpURLConnection) obj.openConnection();
  
-		// optional default is GET
-		con.setRequestMethod("GET");
+	// optional default is GET
+	con.setRequestMethod("GET");
  
-		//add request header
-		con.setRequestProperty("User-Agent", USER_AGENT);
+	//add request header
+	con.setRequestProperty("User-Agent", USER_AGENT);
  
-		int responseCode = con.getResponseCode();
-		System.out.println("\nSending 'GET' request to URL : " + url);
-		System.out.println("Response Code : " + responseCode);
+	int responseCode = con.getResponseCode();
+	System.out.println("\nSending 'GET' request to URL : " + url);
+	System.out.println("Response Code : " + responseCode);
  
-		BufferedReader in = new BufferedReader(
-		        new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
+	BufferedReader in = new BufferedReader(
+	    new InputStreamReader(con.getInputStream()));
+	String inputLine;
+	StringBuffer response = new StringBuffer();
  
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
-		}
-		in.close();
- 
-		//retorno resultado
-		return response.toString();
- 
+	while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
 	}
+	in.close();
+ 
+	//retorno resultado
+	return response.toString();
+    }
     
+    //Método que envia dados via Post para o WebService
     private void sendPost(String url, String urlParameters) throws Exception {
  
-		//String url = "https://selfsolve.apple.com/wcResults.do";
-		URL obj = new URL(url);
-		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+	//String url = "https://selfsolve.apple.com/wcResults.do";
+	URL obj = new URL(url);
+	HttpURLConnection con = (HttpURLConnection) obj.openConnection();
  
-		//add reuqest header
-		con.setRequestMethod("POST");
-                con.setRequestProperty("Content-Type", "application/json");
-		con.setRequestProperty("User-Agent", USER_AGENT);
-		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+	//add reuqest header
+	con.setRequestMethod("POST");
+        con.setRequestProperty("Content-Type", "application/json");
+	con.setRequestProperty("User-Agent", USER_AGENT);
+	con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
  
-		//String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
+	//String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
  
-		// Send post request
-		con.setDoOutput(true);
-		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-		wr.writeBytes(urlParameters);
-		wr.flush();
-		wr.close();
+	// Send post request
+	con.setDoOutput(true);
+	DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+	wr.writeBytes(urlParameters);
+	wr.flush();
+	wr.close();
  
-		int responseCode = con.getResponseCode();
-		System.out.println("\nSending 'POST' request to URL : " + url);
-		System.out.println("Post parameters : " + urlParameters);
-		System.out.println("Response Code : " + responseCode);
+	int responseCode = con.getResponseCode();
+	System.out.println("\nSending 'POST' request to URL : " + url);
+	System.out.println("Post parameters : " + urlParameters);
+	System.out.println("Response Code : " + responseCode);
  
-		BufferedReader in = new BufferedReader(
-		        new InputStreamReader(con.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
+	BufferedReader in = new BufferedReader(
+	    new InputStreamReader(con.getInputStream()));
+	String inputLine;
+	StringBuffer response = new StringBuffer();
  
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
-		}
-		in.close();
- 
-		//print result
-		System.out.println(response.toString());
- 
+	while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
 	}
+	in.close();
+ 
+	//print result
+	System.out.println(response.toString());
+    }
 }

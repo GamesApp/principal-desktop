@@ -176,10 +176,10 @@ public class LoginSwing extends javax.swing.JFrame {
             
             try {
                 Professor professor = new RequisicaoHttp().loginProfessor(jTFProfessorLogin.getText(), senhaCriptografada);
-                System.out.println("professor" + professor.toString());
+                //System.out.println("professor" + professor.toString());
                 
                 if (professor.getEmail() != null) {
-                    System.out.println("passa");
+                    //System.out.println("passa");
                     
                     new ProfessorSwing().setVisible(true);
                     this.setVisible(false);
