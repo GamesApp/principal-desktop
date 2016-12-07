@@ -65,7 +65,7 @@ public class RequisicaoHttp {
         
         String professorJson = gson.toJson(professor, professorType);
         
-        System.out.println("Professor Json: " + professorJson);
+        //System.out.println("Professor Json: " + professorJson);
         
         new RequisicaoHttp().sendPost(url, professorJson);
     }
@@ -110,7 +110,7 @@ public class RequisicaoHttp {
         new RequisicaoHttp().sendPost(url, alunoJson);
     }
     
-    //Método para inserir um novo professor
+    //Método para inserir uma nova atividade
     public void insertAtividade(Atividade atividade) throws Exception {
         String url = "http://" + IP +
                 ":8080/web-service/webresources/GamesApp/Atividade/insert";

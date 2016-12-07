@@ -237,14 +237,14 @@ public class SiapeSenhaSwing extends javax.swing.JFrame {
             
             if (String.valueOf(jPFSenhaProfessor.getPassword()).equals(String.valueOf(jPFConfirmaSenhaProfessor.getPassword()))) {
                 String senhaProfessor = String.valueOf(jPFSenhaProfessor.getPassword());
-                System.out.println("Senha professor: "+senhaProfessor);
+                //System.out.println("Senha professor: "+senhaProfessor);
                 
                 //VERIFICAR SE ESTÁ CORRETO A FUCK DA SENHA
                 
                 ExemploCriptografia ex = new ExemploCriptografia();
                 String senhaCriptografada = ex.GeraCriptografia(senhaProfessor, 1);
                 
-                System.out.println("senha professor criptografada: "+senhaCriptografada);
+                //System.out.println("senha professor criptografada: "+senhaCriptografada);
                 //salvar PROFESSOR NO BANCO
                 //CONSUMIR REQUISICAOHTTP MÉTODO SENDPOST
                 
@@ -264,7 +264,7 @@ public class SiapeSenhaSwing extends javax.swing.JFrame {
                 this.setVisible(false);
                 //REVER ESSA INFORMAÇÕES SWING
                 //new InformacoesSwing().setVisible(true);
-                //new ProfessorSwing().setVisible(true);
+                new ProfessorSwing().setVisible(true);
                 
             }else{
                 JOptionPane.showMessageDialog(null, "Os campos de nova senha não coincidem!");
