@@ -264,7 +264,22 @@ public class SiapeSenhaSwing extends javax.swing.JFrame {
                 this.setVisible(false);
                 //REVER ESSA INFORMAÇÕES SWING
                 //new InformacoesSwing().setVisible(true);
-                new ProfessorSwing().setVisible(true);
+                
+                Professor professorAux;
+                try {
+                    professorAux = new RequisicaoHttp().loginProfessor(professor.getEmail(), professor.getSenha());
+                    //System.out.println("professor" + professor.toString());
+                } catch (Exception ex1) {
+                    Logger.getLogger(SiapeSenhaSwing.class.getName()).log(Level.SEVERE, null, ex1);
+                }
+                
+                if (professor.getEmail() != null) {
+                    //System.out.println("passa");
+                    
+                    new ProfessorSwing(professor).setVisible(true);
+                }
+                
+                //new ProfessorSwing().setVisible(true);
                 
             }else{
                 JOptionPane.showMessageDialog(null, "Os campos de nova senha não coincidem!");

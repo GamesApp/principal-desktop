@@ -181,10 +181,9 @@ public class LoginSwing extends javax.swing.JFrame {
                 if (professor.getEmail() != null) {
                     //System.out.println("passa");
                     
-                    new ProfessorSwing().setVisible(true);
+                    new ProfessorSwing(professor).setVisible(true);
                     this.setVisible(false);
                 } else {
-                    
                     JOptionPane.showMessageDialog(null, "E-mail e/ou senha inválidos!\nFavor verificar e tentar novamente\n\nVocê pode clicar em cadastrar para criar um usuário", "Login não permitidos", JOptionPane.WARNING_MESSAGE);
                 }
             } catch (Exception ex) {
