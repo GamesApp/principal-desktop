@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package principal.login.swing;
 
 import Criptografia.CodCifraDeVigenere;
 import Criptografia.ExemploCriptografia;
 import RecuperarSenha.RecuperarSenha;
 import conexaodb.RequisicaoHttp;
+import conexaodb.RequisicoesHttp;
 import entidades.pessoa.Professor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -175,7 +171,7 @@ public class LoginSwing extends javax.swing.JFrame {
             String senhaCriptografada = criptografar.cifrar();
             
             try {
-                Professor professor = new RequisicaoHttp().loginProfessor(jTFProfessorLogin.getText(), senhaCriptografada);
+                Professor professor = new RequisicoesHttp().loginProfessor(jTFProfessorLogin.getText(), senhaCriptografada);
                 //System.out.println("professor" + professor.toString());
                 
                 if (professor.getEmail() != null) {
@@ -207,23 +203,44 @@ public class LoginSwing extends javax.swing.JFrame {
             //procurar o email no banco
             String email = jTFProfessorLogin.getText();
             //pegar a senha do respectivo email e descriptografar
-            String senha= "cF^IJ/cZM\\";//estará gravada no bando criptografada
+            Professor professor = new Professor();
             
-            //VERIFICAR AQUI, PROVAVELMENTE INVERTER OS COISA
-            CodCifraDeVigenere recSenha = new CodCifraDeVigenere(senha);
-            String senhaDescriptografada = recSenha.decifrar();
+            try {
+                System.out.println("Try  entra");
+                professor = new RequisicoesHttp().recuperaSenhaProfessor(email);
+                //RequisicoesHttp oi = new RequisicoesHttp();
+                //oi.aiDede("lorenzi@lorenzi");
+                //new RequisicaoHttp().aiDede("lorenzi@lorenzi");
+                System.out.println("Try sai");
+            } catch (Exception ex) {
+                System.out.println(ex);
+                Logger.getLogger(LoginSwing.class.getName()).log(Level.SEVERE, null, ex);
+            }
             
-            try{
-                RecuperarSenha EnviaEmail = new RecuperarSenha();
-                EnviaEmail.EnviarEmail(email, senhaDescriptografada);
-                JOptionPane.showMessageDialog(null, "Dentro de instantes receberá sua senha no email cadastrado", "Atenção!", JOptionPane.WARNING_MESSAGE);
+            String senha = null;
+            if (professor != null) {
+                senha = professor.getSenha();//estará gravada no bando criptografada                
+            
+                //VERIFICAR AQUI, PROVAVELMENTE INVERTER OS COISA
+                CodCifraDeVigenere recSenha = new CodCifraDeVigenere(senha);
+                String senhaDescriptografada = recSenha.decifrar();
 
-            }catch(Exception ex){
-                JOptionPane.showMessageDialog(null, "Não foi possível enviar o email\nVerifique seu email de login e a conexão com a internet\nObrigado!", "Atenção!", JOptionPane.WARNING_MESSAGE);
-                jTFProfessorLogin.setText("");
-        }
+                System.out.println("Senha descrip: "+senhaDescriptografada);
+
+                try{
+                    RecuperarSenha EnviaEmail = new RecuperarSenha();
+                    EnviaEmail.EnviarEmail(email, senhaDescriptografada);
+                    JOptionPane.showMessageDialog(null, "Dentro de instantes receberá sua senha no email cadastrado", "Atenção!", JOptionPane.WARNING_MESSAGE);
+
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Não foi possível enviar o email\nVerifique seu email de login e a conexão com a internet\nObrigado!", "Atenção!", JOptionPane.WARNING_MESSAGE);
+                    jTFProfessorLogin.setText("");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "E-mail não encontrado!", "Atenção!", JOptionPane.WARNING_MESSAGE);
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "Favor informe seu email", "Atenção!", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Favor informe seu e-mail", "Atenção!", JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_jLbRecuperarSenhaMouseClicked

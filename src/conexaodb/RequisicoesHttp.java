@@ -23,11 +23,11 @@ import java.util.ArrayList;
  *
  * @author matheush
  */
-public class RequisicaoHttp {
+public class RequisicoesHttp {
     private final String USER_AGENT = "Mozilla/5.0";
     private final String IP = "127.0.0.1";
 
-    public RequisicaoHttp() {
+    public RequisicoesHttp() {
     }
     
     //Método para verificar o login do professor
@@ -36,7 +36,7 @@ public class RequisicaoHttp {
                 ":8080/web-service/webresources/GamesApp/Professor/login/" +
                 email + "/" + senha;
         
-        String retornoJson = new RequisicaoHttp().sendGet(url);
+        String retornoJson = new RequisicoesHttp().sendGet(url);
         Professor professor;
         
         if (!retornoJson.equals("")) {
@@ -61,11 +61,11 @@ public class RequisicaoHttp {
         System.out.println("teste passa");
 
         String url = "http://" + IP +
-                ":8080/web-service/webresources/GamesApp/Professor/login/" +
+                ":8080/web-service/webresources/GamesApp/Professor/recuperacao/" +
                 email;
         System.out.println("teste passa url");
         
-        String retornoJson = new RequisicaoHttp().sendGet(url);
+        String retornoJson = new RequisicoesHttp().sendGet(url);
         Professor professor;
         
         if (!retornoJson.equals("")) {
@@ -100,7 +100,7 @@ public class RequisicaoHttp {
         
         //System.out.println("Professor Json: " + professorJson);
         
-        new RequisicaoHttp().sendPost(url, professorJson);
+        new RequisicoesHttp().sendPost(url, professorJson);
     }
     
     public void updateProfessor(Professor professor) throws Exception {
@@ -112,7 +112,7 @@ public class RequisicaoHttp {
         
         String professorJson = gson.toJson(professor, professorType);
         
-        new RequisicaoHttp().sendPut(url, professorJson);
+        new RequisicoesHttp().sendPut(url, professorJson);
     }
     
     //Método para verificar o login do aluno
@@ -121,7 +121,7 @@ public class RequisicaoHttp {
                 ":8080/web-service/webresources/GamesApp/Aluno/login/" +
                 email + "/" + senha;
         
-        String retornoJson = new RequisicaoHttp().sendGet(url);
+        String retornoJson = new RequisicoesHttp().sendGet(url);
         Aluno aluno;
         
         if (!retornoJson.equals("")) {
@@ -152,7 +152,7 @@ public class RequisicaoHttp {
         
         System.out.println("Aluno Json: " + alunoJson);
         
-        new RequisicaoHttp().sendPost(url, alunoJson);
+        new RequisicoesHttp().sendPost(url, alunoJson);
     }
     
     //Método para inserir uma nova atividade
@@ -167,7 +167,7 @@ public class RequisicaoHttp {
         
         System.out.println("Atividade Json: " + atividadeJson);
         
-        new RequisicaoHttp().sendPost(url, atividadeJson);
+        new RequisicoesHttp().sendPost(url, atividadeJson);
     }
     
     //Método para buscar todas as atividades
@@ -176,7 +176,7 @@ public class RequisicaoHttp {
         String url = "http://" + IP +
                 ":8080/web-service/webresources/GamesApp/Atividade/get/todas";
         
-        String retornoJson = new RequisicaoHttp().sendGet(url);
+        String retornoJson = new RequisicoesHttp().sendGet(url);
         ArrayList<Atividade> atividades;
         
         if (!retornoJson.equals("")) {
@@ -204,14 +204,14 @@ public class RequisicaoHttp {
         
         String atividadeJson = gson.toJson(atividade, atividadeType);
         
-        new RequisicaoHttp().sendPut(url, atividadeJson);
+        new RequisicoesHttp().sendPut(url, atividadeJson);
     }
     
     public void deleteAtividade(Atividade atividade) throws Exception {
         String url = "http://" + IP +
                 ":8080/web-service/webresources/GamesApp/Atividade/delete/" + atividade.getId();
         
-        new RequisicaoHttp().sendDelete(url);
+        new RequisicoesHttp().sendDelete(url);
     }
     
     //Método para inserir uma nova turma
@@ -226,7 +226,7 @@ public class RequisicaoHttp {
         
         System.out.println("Turma Json: " + turmaJson);
         
-        new RequisicaoHttp().sendPost(url, turmaJson);
+        new RequisicoesHttp().sendPost(url, turmaJson);
     }
     
     //Método para buscar todas as turmas
@@ -235,7 +235,7 @@ public class RequisicaoHttp {
         String url = "http://" + IP +
                 ":8080/web-service/webresources/GamesApp/Turma/get/todas";
         
-        String retornoJson = new RequisicaoHttp().sendGet(url);
+        String retornoJson = new RequisicoesHttp().sendGet(url);
         ArrayList<Turma> turmas;
         
         if (!retornoJson.equals("")) {
@@ -263,14 +263,14 @@ public class RequisicaoHttp {
         
         String turmaJson = gson.toJson(turma, turmaType);
         
-        new RequisicaoHttp().sendPut(url, turmaJson);
+        new RequisicoesHttp().sendPut(url, turmaJson);
     }
     
     public void deleteTurma(Turma turma) throws Exception {
         String url = "http://" + IP +
                 ":8080/web-service/webresources/GamesApp/Turma/delete/" + turma.getId();
         
-        new RequisicaoHttp().sendDelete(url);
+        new RequisicoesHttp().sendDelete(url);
     }
 
     //Método que faz requisição http via url
