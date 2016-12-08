@@ -208,6 +208,8 @@ public class LoginSwing extends javax.swing.JFrame {
             String email = jTFProfessorLogin.getText();
             //pegar a senha do respectivo email e descriptografar
             String senha= "cF^IJ/cZM\\";//estará gravada no bando criptografada
+            
+            //VERIFICAR AQUI, PROVAVELMENTE INVERTER OS COISA
             CodCifraDeVigenere recSenha = new CodCifraDeVigenere(senha);
             String senhaDescriptografada = recSenha.decifrar();
             
